@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=2.9in,paperwidth=3.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{internationalorange}{rgb}{1.0, 0.31, 0.0}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+
+\begin{document}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+\tikzsetnextfilename{test.pdf}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        bar width=8pt,
+        xtick = data,
+        xticklabels={1,3,7,19},
+        xmin=-2,
+        xmax=17,
+        xlabel={Ambient Oxygen level ($\% O_2$)},
+        scaled y ticks = false,
+        ymin=0,
+        ymax=60,
+        error bars/y dir=plus, % turn on error bars
+        error bars/y explicit,
+        error bars/error bar style={thick},
+    ]
+        \addplot[style={black,fill=blue,mark=none}] table [x index=0, y index=1, y error index=2] {Measures/measured_cell_60_std_dimensioned.txt};
+        \addplot[style={black,fill=red,mark=none}] table [x index=0, y index=1, y error index=2] {Prediction_E/Cell/predicted_cell_60_average_std.txt};
+
+    \end{axis}
+\end{tikzpicture}
+\end{document}
+

@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=2.7in,paperwidth=3.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{internationalorange}{rgb}{1.0, 0.31, 0.0}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+
+\begin{document}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+\tikzsetnextfilename{test.pdf}
+\begin{tikzpicture}
+
+\begin{axis}[xmin=0,
+xmax=17,
+ymin=0, 
+ymax=19,
+xlabel={Time($\SI{}{h})$}, 
+%ylabel={Oxygen gel ($\% O_2$)},
+xlabel style={font=\normalsize},
+ylabel style={font=\normalsize},yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=5},
+xtick={0,6,12,17}, 
+legend columns=2, legend style={/tikz/column 2/.style={column sep=5pt},at={(0.53,0.97)}, anchor=north, font=\small }]
+
+\addplot [white,name path=C, line width=0pt,forget plot] table {Measures/measured_O2_154_3_percent_bottom.txt};
+\addplot [blue, line width=1.5pt, mark=square*, mark size=1pt] table {Measures/measured_O2_154_3_percent_mid.txt};
+\addplot [white,name path=D, line width=0pt,forget plot] table {Measures/measured_O2_154_3_percent_top.txt};
+\addplot[blue!10] fill between[of=C and D];
+
+\addplot [white,name path=gamma, line width=0pt, forget plot] table {Prediction_E/Oxygen/predicted_O2_154_3_percent_bottom.txt};
+\addplot [red, mark=*, mark size=1pt, line width=1.5pt] table {Prediction_E/Oxygen/predicted_O2_154_3_percent_mid.txt};
+\addplot [white,name path=delta, line width=0pt, forget plot] table {Prediction_E/Oxygen/predicted_O2_154_3_percent_top.txt};
+\addplot[red!20] fill between[of=gamma and delta];
+
+\legend{Experiments, 2 $\text{std. - exp.}$,Simulations, 2 $\text{std. - sim.}$}
+
+\end{axis}
+
+
+\end{tikzpicture}
+
+\end{document}

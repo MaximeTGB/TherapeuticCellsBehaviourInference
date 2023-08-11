@@ -1,0 +1,45 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=2.7in,paperwidth=3.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{mikadoyellow}{rgb}{1.0, 0.77, 0.05}
+\definecolor{ferrarired}{rgb}{1.0, 0.11, 0.0}
+\definecolor{debianred}{rgb}{0.84, 0.04, 0.33}
+\definecolor{cornellred}{rgb}{0.7, 0.11, 0.11}
+\definecolor{internationalorange}{rgb}{1.0, 0.31, 0.0}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+
+
+
+\begin{document}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+\tikzsetnextfilename{test.pdf}
+\begin{tikzpicture}
+
+\begin{axis}[xmin=0,xmax=22, ymin=0, ymax=13, xlabel={Time ($\SI{}{h})$},xlabel style={font=\normalsize},ylabel style={font=\normalsize},yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=5}, xtick={0,6,12,18,22},  legend columns=4, legend style={/tikz/column 4/.style={column sep=5pt},at={(0.5,-0.2)}, anchor=north, font=\small } ]
+
+\addplot [white,name path=E, line width=0pt] table {measure_O2_7_percent_bottom.txt};
+\addplot [blue, line width=1.5pt, mark=square*, mark size=1pt] table {measure_O2_7_percent_mid.txt};
+\addplot [white,name path=F, line width=0pt] table {measure_O2_7_percent_top.txt};
+\addplot[blue!10] fill between[of=E and F];
+
+\addplot [white,name path=eta, line width=0pt] table {prediction_O2_7_percent_bottom.txt};
+\addplot [red, mark=*, mark size=1pt, line width=1.5pt] table {prediction_O2_7_percent_mid.txt};
+\addplot [white,name path=theta, line width=0pt] table {prediction_O2_7_percent_top.txt};
+\addplot[red!20] fill between[of=eta and theta];
+\end{axis}
+
+
+\end{tikzpicture}
+
+\end{document}

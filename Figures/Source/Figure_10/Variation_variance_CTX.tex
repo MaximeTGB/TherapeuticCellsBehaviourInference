@@ -1,0 +1,156 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=8in,paperwidth=3.7in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{pastelred}{rgb}{1.0, 0.41, 0.38}
+\definecolor{pastelmagenta}{rgb}{0.96, 0.6, 0.76}
+\definecolor{pastelpink}{rgb}{1.0, 0.82, 0.86}
+\definecolor{applegreen}{rgb}{0.55, 0.71, 0.0}
+\definecolor{darkpowderblue}{rgb}{0.0, 0.2, 0.6}
+\definecolor{crimsonglory}{rgb}{0.75, 0.0, 0.2}
+\definecolor{chromeyellow}{rgb}{1.0, 0.65, 0.0}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{black}{rgb}{0.0, 0.0, 0.0}
+
+\begin{document}
+\pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+
+\begin{tikzpicture}
+\begin{axis}[
+    xmode=log,
+    xlabel={Temperature [\textcelsius]},
+    ylabel={Solubility [g per 100 g water]},
+    xmin=0.04, xmax=0.16,
+    ymin=0, ymax=1,
+    xtick={0.04,0.08,0.12,0.16},
+    ytick={0,0.2,0.4,0.6,0.8,1},
+    legend pos=north west,
+    ymajorgrids=true,
+    grid style=dashed,
+    xticklabels={0.04,0.08,0.12,0.16},
+    legend style={at={(0.5,-0.1)},anchor=north,cells={align=left}},
+    legend columns=3
+]
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{Oxygen}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=blue,mark=*,] coordinates {(0.044,0.14)};\addlegendentry{$D_{m,\text{ox}}$}
+\addplot[color=blue,mark=x,] coordinates {(0.045,0.054)};\addlegendentry{$D_{g,\text{ox}}$}
+\addplot[color=blue,mark=+,] coordinates {(0.044,0.056)};\addlegendentry{$\eta_{g/m,\text{ox}}$}
+\addplot[color=blue,mark=o,] coordinates {(0.081,0.75)};\addlegendentry{$M_{\text{ox,max}}$}
+\addplot[color=blue,mark=square,] coordinates {(0.058,0.5)};\addlegendentry{$C_{\text{ox},1/2}$}
+\addlegendimage{empty legend}\addlegendentry{}
+
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{Glucose}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=applegreen,mark=*,] coordinates {(0.045,0.05)};\addlegendentry{$D_{m,\text{glu}}$}
+\addplot[color=applegreen,mark=o,] coordinates {(0.045,0.055)};\addlegendentry{$D_{g,\text{glu}}$}
+\addplot[color=applegreen,mark=x,] coordinates {(0.042,0.04)};\addlegendentry{$\eta_{g/m,\text{glu}}$}
+\addplot[color=applegreen,mark=+,] coordinates {(0.052,0.16)};\addlegendentry{$M_{\text{glu,max}}$}
+\addplot[color=applegreen,mark=triangle,] coordinates {(0.044,0.047)};\addlegendentry{$C_{\text{glu},1/2}$}
+\addplot[color=applegreen,mark=square,] coordinates {(0.049,0.12)};\addlegendentry{$A$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{VEGF}
+\addlegendimage{empty legend}\addlegendentry{}
+
+\addplot[color=crimsonglory,mark=*,] coordinates {(0.044,0.1)};\addlegendentry{$D_{m,\text{VEGF}}$}
+\addplot[color=crimsonglory,mark=o,] coordinates {(0.043,0.05)};\addlegendentry{$D_{g,\text{VEGF}}$}
+\addplot[color=crimsonglory,mark=x,] coordinates {(0.047,0.12)};\addlegendentry{$\eta_{g/m,\text{VEGF}}$}
+\addplot[color=crimsonglory,mark=+,] coordinates {(0.057,0.20)};\addlegendentry{$\lambda_{\text{VEGF}}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{$M_{\text{VEGF},1}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=pastelpink,mark=triangle,] coordinates {(0.054,0.33)};\addlegendentry{$\beta$}
+\addplot[color=pastelpink,mark=square,] coordinates {(0.072,0.32)};\addlegendentry{$C_{\text{ox,hypo}}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{$M_{\text{VEGF},2}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=pastelmagenta,mark=diamond,] coordinates {(0.051,0.3)};\addlegendentry{$\alpha$}
+\addplot[color=pastelmagenta,mark=pentagon,] coordinates {(0.054,0.33)};\addlegendentry{$V$}
+\addplot[color=pastelmagenta,mark=oplus,] coordinates {(0.054,0.33)};\addlegendentry{$\nu$}
+\addplot[color=pastelmagenta,mark=square,] coordinates {(0.072,0.32)};\addlegendentry{$C_{\text{ox,hypo}}$}
+\addplot[color=pastelmagenta,mark=star,] coordinates {(0.072,0.32)};\addlegendentry{$C_{\text{ox,hyper}}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{$M_{\text{VEGF},3}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=pastelred,mark=diamond,] coordinates {(0.051,0.3)};\addlegendentry{$\alpha_0$}
+\addplot[color=pastelred,mark=Mercedes star,] coordinates {(0.051,0.3)};\addlegendentry{$\alpha_1$}
+\addplot[color=pastelred,mark=Mercedes star flipped,] coordinates {(0.051,0.3)};\addlegendentry{$\alpha_2$}
+\addplot[color=pastelred,mark=pentagon,] coordinates {(0.054,0.33)};\addlegendentry{$V_0$}
+\addplot[color=pastelred,mark=|,] coordinates {(0.054,0.33)};\addlegendentry{$V_1$}
+\addplot[color=pastelred,mark=oplus,] coordinates {(0.054,0.33)};\addlegendentry{$\nu$}
+\addplot[color=pastelred,mark=square,] coordinates {(0.072,0.32)};\addlegendentry{$C_{\text{ox,hypo}}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{$M_{\text{VEGF},4}$}
+\addlegendimage{empty legend}\addlegendentry{}
+\addplot[color=red,mark=diamond,] coordinates {(0.051,0.3)};\addlegendentry{$\alpha$}
+\addplot[color=red,mark=triangle,] coordinates {(0.054,0.33)};\addlegendentry{$\beta$}
+\addplot[color=red,mark=square,] coordinates {(0.072,0.32)};\addlegendentry{$C_{\text{ox,hypo}}$}
+\addplot[color=red,mark=otimes,] coordinates {(0.055,0.5)};\addlegendentry{$C_{\text{cell,crowd}}$}
+
+
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{Cell}
+\addlegendimage{empty legend}\addlegendentry{}
+
+\addplot[color=darkviolet,mark=triangle,] coordinates {(0.05,0.37)};\addlegendentry{$\delta_{0}$}
+\addplot[color=darkviolet,mark=square,] coordinates {(0.046,0.22)};\addlegendentry{$\delta_{\text{ox}}$}
+\addplot[color=darkviolet,mark=diamond,] coordinates {(0.047,0.02)};\addlegendentry{$\delta_{\text{glu}}$}
+\addplot[color=darkviolet,mark=diamond,] coordinates {(0.047,0.02)};\addlegendentry{$\gamma$}
+\addplot[color=darkviolet,mark=pentagon,] coordinates {(0.047,0.02)};\addlegendentry{$C_{\text{cell, max}}$ }
+
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{}
+\addlegendimage{empty legend}\addlegendentry{IBC}
+\addlegendimage{empty legend}\addlegendentry{}
+
+\addplot[color=chromeyellow,mark=triangle,] coordinates {(0.045,0.41)};\addlegendentry{$C_{0,\text{ox}}$}
+\addplot[color=chromeyellow,mark=square,] coordinates {(0.05,0.05)};\addlegendentry{$C_{a/m}$}
+\addplot[color=chromeyellow,mark=diamond,] coordinates {(0.1,0.01)};\addlegendentry{$C_{0,\text{glu}}$}
+\addplot[color=chromeyellow,mark=pentagon,] coordinates {(0.15,0.65)};\addlegendentry{$C_{0,\text{cell}}$}
+
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

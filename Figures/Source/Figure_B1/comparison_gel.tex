@@ -1,0 +1,40 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=3.6in,paperwidth=3.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.18}
+\usepgfplotslibrary{external}
+\tikzexternalize
+
+\begin{document}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+\tikzsetnextfilename{test.pdf}
+\begin{tikzpicture}
+\begin{axis}[xmin=0,xmax=24, ymin=0, ymax=1, xlabel={Time(\SI{}{h})},ylabel={Normal Gel Concentration},xlabel style={font=\normalsize},ylabel style={font=\normalsize},yticklabel style={/pgf/number format/fixed, /pgf/number format/precision=5}, xtick={0,6,12,18,24},  legend columns=4, legend style={/tikz/column 4/.style={column sep=5pt},at={(0.5,-0.2)}, anchor=north, font=\small } ]
+
+\addplot [blue, line width=1.2pt] table {oxygen_semi_analytical_gel_concentration.txt};
+\addplot [red, line width=1.2pt] table {glucose_semi_analytical_gel_concentration.txt};
+\addplot [teal, line width=1.2pt] table {VEGF_semi_analytical_gel_concentration.txt};
+\addplot [cyan, line width=1.2pt] table {density_semi_analytical_gel_concentration.txt};
+
+\addplot [blue, dashdotted, line width=1.2pt] table {oxygen_analytical_gel_concentration.txt};
+\addplot [red, dashdotted, line width=1.2pt] table {glucose_analytical_gel_concentration.txt};
+\addplot [teal, dashdotted, line width=1.2pt] table {VEGF_analytical_gel_concentration.txt};
+\addplot [cyan, dashdotted, line width=1.2pt] table {density_analytical_gel_concentration.txt};
+
+\addplot [blue, dashed, line width=1.2pt] table {oxygen_1D_gel_concentration.txt};
+\addplot [red, dashed, line width=1.2pt] table {glucose_1D_gel_concentration.txt};
+\addplot [teal, dashed, line width=1.2pt] table {VEGF_1D_gel_concentration.txt};
+\addplot [cyan, dashed, line width=1.2pt] table {density_1D_gel_concentration.txt};
+
+\addplot [blue, dotted, line width=1.2pt] table {oxygen_2D_gel_concentration.txt};
+\addplot [red, dotted, line width=1.2pt] table {glucose_2D_gel_concentration.txt};
+\addplot [teal, dotted, line width=1.2pt] table {VEGF_2D_gel_concentration.txt};
+\addplot [cyan, dotted, line width=1.2pt] table {density_2D_gel_concentration.txt};
+
+\legend{1D-An. $\text{O}_2$, Glu., VEGF, Cells, An. $\text{O}_2$, Glu., VEGF, Cell, 1D $\text{O}_2$, Glu., VEGF, Cell, 2D $\text{O}_2$, Glu., VEGF, Cell }
+\end{axis}
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=2.8in,paperwidth=4.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+\definecolor{cherryblossompink}{rgb}{1.0, 0.72, 0.77}
+\definecolor{carnationpink}{rgb}{1.0, 0.65, 0.79}
+\definecolor{pastelred}{rgb}{1.0, 0.41, 0.38}
+\definecolor{pastelmagenta}{rgb}{0.96, 0.6, 0.76}
+\definecolor{pastelpink}{rgb}{1.0, 0.82, 0.86}
+
+\begin{document}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+\tikzsetnextfilename{test.pdf}
+
+\begin{tikzpicture}
+    \begin{axis}[
+        ybar,
+        width  = 12cm,
+        height  = 7cm,
+        bar width=8pt,
+        xmin=-3,
+        xmax=23,
+        xtick = data,
+        xticklabels={1,3,5,10,16},
+        xlabel={Ambient Oxygen level ($\% O_2$)},
+        scaled y ticks = false,
+        ymin=0, ymax=20,
+        error bars/y dir=plus, % turn on error bars
+        error bars/y explicit,
+        error bars/error bar style={thick},legend columns=2, 
+        legend style={/tikz/column 2/.style={column sep=5pt},at={(0.7,0.97)}, anchor=north, font=\small }
+    ]
+        \addplot[style={black,fill=blue,mark=none}] table [x index=0, y index=1, y error index=2] {Measures/measured_VEGF_231_std.txt};
+        \addplot[style={black,fill=red,mark=none}] table [x index=0, y index=1, y error index=2] {Prediction_E/VEGF/predicted_VEGF_231_average_std_model_4.txt};
+        \addplot[style={black,fill=pastelred,mark=none}] table [x index=0, y index=1, y error index=2] {Prediction_E/VEGF/predicted_VEGF_231_average_std_model_3.txt};
+        \addplot[style={black,fill=pastelmagenta,mark=none}] table [x index=0, y index=1, y error index=2] {Prediction_E/VEGF/predicted_VEGF_231_average_std_model_2.txt};
+        \addplot[style={black,fill=pastelpink,mark=none}] table [x index=0, y index=1, y error index=2] {Prediction_E/VEGF/predicted_VEGF_231_average_std_model_1.txt};
+        
+    \end{axis}
+\end{tikzpicture}
+\end{document}
+

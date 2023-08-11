@@ -1,0 +1,77 @@
+\documentclass{article}
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage{siunitx}
+\usepackage[paperheight=2.9in,paperwidth=3.9in,margin=0in]{geometry}
+\pgfplotsset{compat=1.17}
+\usepgfplotslibrary{external}
+\usepgfplotslibrary{fillbetween}
+
+\tikzexternalize
+
+\definecolor{celestialblue}{rgb}{0.29, 0.59, 0.82}
+\definecolor{cobalt}{rgb}{0.0, 0.28, 0.67}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{internationalorange}{rgb}{1.0, 0.31, 0.0}
+\definecolor{islamicgreen}{rgb}{0.0, 0.56, 0.0}
+
+\begin{document}
+\begin{tikzpicture}
+ \pagenumbering{gobble} 
+\pgfplotsset{every axis plot/.append style={line width=1pt, font=\large,}}
+
+%shader=flat corner
+
+\begin{axis}[view={0}{90},
+            colormap={violetnew}{rgb255(0cm)=(25,25,122); color(1cm)=(white); rgb255(2cm)=(238,140,238)},
+            point meta max=1, point meta min=-1,
+            xticklabels={},
+            yticklabels={},
+            ticks=none,
+            width=0.8\textwidth,
+            height=0.8\textwidth
+            ]
+            \addplot3[surf,shader=flat corner] file {average_rho_CTX.txt};
+            \draw [line width=1pt] (5,0) -- (5,49);
+            \draw [dotted, line width=1pt] (3,0) -- (3,49);
+            \draw [line width=1pt] (0,5) -- (49,5);
+            \draw [dotted, line width=1pt] (0,3) -- (49,3);
+
+            
+            \draw [line width=1pt] (11,0) -- (11,49);
+            \draw [dotted, line width=1pt] (8,0) -- (8,49);    
+            \draw [line width=1pt] (0,11) -- (49,11);
+            \draw [dotted, line width=1pt] (0,8) -- (49,8);
+            
+            \draw [dotted, line width=1pt] (15,0) -- (15,49);
+            \draw [dotted, line width=1pt] (0,15) -- (49,15);
+            
+            \draw [dotted, line width=1pt] (17,0) -- (17,49);
+            \draw [dotted, line width=1pt] (0,17) -- (49,17);
+            
+            \draw [dotted, line width=1pt] (22,0) -- (22,49);
+            \draw [dotted, line width=1pt] (0,22) -- (49,22);
+            
+            \draw [dotted, line width=1pt] (29,0) -- (29,49);
+            \draw [dotted, line width=1pt] (0,29) -- (49,29);
+            
+            \draw [line width=1pt] (33,0) -- (33,49);
+            \draw [line width=1pt] (0,33) -- (49,33);
+            %%cells
+            
+            \draw [line width=1pt] (36,0) -- (36,49);
+            \draw [line width=1pt] (0,36) -- (49,36);
+            
+            \draw [dotted, line width=1pt] (37,0) -- (37,49);
+            \draw [dotted, line width=1pt] (0,37) -- (49,37);
+
+            \draw [dotted, line width=1pt] (41,0) -- (41,49);
+            \draw [dotted, line width=1pt] (0,41) -- (49,41);
+            
+            \draw [dotted, line width=1pt] (42,0) -- (42,49);
+            \draw [dotted, line width=1pt] (0,42) -- (49,42);
+\end{axis}
+
+
+\end{tikzpicture}
+\end{document}
